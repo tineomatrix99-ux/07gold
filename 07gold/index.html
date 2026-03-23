@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07gold - Buy & Sell OSRS Gold Instantly</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="admin-bar" class="admin-bar" style="display: none;">
+        <div class="admin-status">
+            <span class="status-dot"></span>
+            <strong>ADMIN MODE</strong>
+        </div>
+        <div class="admin-stats">
+            <span>Online Users: <strong id="user-count">24</strong></span>
+            <span>Active Chats: <strong id="active-chat-count">0</strong></span>
+        </div>
+        <button id="logout-btn" class="logout-link">Logout</button>
+    </div>
+
+    <div id="admin-dashboard" class="admin-dashboard" style="display: none;">
+        <div class="dashboard-header">
+            <h3>Live Support Dashboard</h3>
+        </div>
+        <div id="admin-active-chats" class="admin-active-chats">
+            <div class="no-chats">Waiting for user messages...</div>
+        </div>
+        <!-- Admin Reply View (Hidden until a chat is selected) -->
+        <div id="admin-reply-view" class="admin-reply-view" style="display: none;">
+            <div class="reply-header">
+                <button id="back-to-list" class="back-btn">←</button>
+                <span id="replying-to">Player#123</span>
+            </div>
+            <div id="admin-chat-log" class="admin-chat-log"></div>
+            <div class="reply-input-area">
+                <input type="text" id="admin-reply-input" placeholder="Type your reply...">
+                <button id="admin-send-reply">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video" playsinline>
+            <source src="os-download-background.webm" type="video/webm">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    <nav class="navbar">
+        <div class="brand-container">
+            <div class="logo-icon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#FFD700" stroke="#DAA520" stroke-width="5"/>
+                    <text x="50" y="65" font-family="Inter" font-weight="800" font-size="40" fill="#1a1a1a" text-anchor="middle">07</text>
+                </svg>
+            </div>
+            <div class="logo-text">07<span>gold</span></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#buy">Buy Gold</a></li>
+            <li><a href="#sell">Sell Gold</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#support">Support</a></li>
+        </ul>
+        <button class="login-btn" id="open-login">Log In</button>
+    </nav>
+
+    <main class="container">
+        <header class="hero">
+            <h1>Buy & Sell OSRS Gold <br><span class="highlight">Instantly.</span></h1>
+            <p>Institutional-grade security. Real-time OSRS gold rates. No bans, just gains.</p>
+        </header>
+
+        <section class="bento-grid">
+            <!-- Calculator Card -->
+            <div class="bento-card card-large calculator-card">
+                <div class="card-header">
+                    <h2>Live Calculator</h2>
+                    <div class="toggle">
+                        <button id="buy-btn" class="active">Buy</button>
+                        <button id="sell-btn">Sell</button>
+                    </div>
+                </div>
+                <div class="calculator-content">
+                    <div class="input-group">
+                        <label>Gold Amount (M)</label>
+                        <input type="number" id="gold-amount" value="100" min="10">
+                    </div>
+                    <div class="input-group">
+                        <label>Total Price (USD)</label>
+                        <div class="price-display">$<span id="total-price">35.00</span></div>
+                    </div>
+                </div>
+                <button class="primary-cta">Get Started</button>
+            </div>
+
+            <!-- Price Card -->
+            <div class="bento-card card-small price-card">
+                <h3>Live OSRS Rate</h3>
+                <div class="rate-display">
+                    <span class="symbol">1M</span>
+                    <span class="rate">$0.35</span>
+                </div>
+                <div class="trend up">+2.4% (24h)</div>
+            </div>
+
+            <!-- Trust Card -->
+            <div class="bento-card card-small trust-card">
+                <h3>Trusted by Players</h3>
+                <div class="trust-score">4.9/5</div>
+                <p>Over 10,000 successful trades completed this month.</p>
+            </div>
+
+            <!-- Security Card -->
+            <div class="bento-card card-medium security-card">
+                <h3>Anti-Ban Protection</h3>
+                <p>Our proprietary transfer methods ensure 100% account safety. Zero bans reported in 2024-2025.</p>
+                <div class="shield-icon">🛡️</div>
+            </div>
+
+            <!-- Payment Methods Card -->
+            <div class="bento-card card-medium payments-card">
+                <h3>Secure Payments</h3>
+                <div class="payment-icons">
+                    <span>Crypto</span>
+                    <span>Visa</span>
+                    <span>MC</span>
+                    <span>Apple Pay</span>
+                </div>
+                <p>Instant delivery upon confirmation.</p>
+            </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">07<span>gold</span></div>
+        <p>© 2026 07gold. All rights reserved. Not affiliated with Jagex.</p>
+    </footer>
+
+    <div class="chat-widget" id="chat-widget">
+        <button class="chat-toggle" id="chat-toggle">
+            <span class="chat-icon">💬</span>
+        </button>
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <div class="header-info">
+                    <div class="status-dot"></div>
+                    <h3>07gold Support</h3>
+                </div>
+                <button class="close-chat" id="close-chat">×</button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message system">
+                    Welcome to 07gold! How can we help you today?
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="send-msg">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="login-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-login">×</button>
+            <div class="modal-header">
+                <h2>Admin Login</h2>
+                <p>Institutional Access Only</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" placeholder="Enter username" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="primary-cta">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
