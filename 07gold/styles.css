@@ -964,6 +964,8 @@ body.admin-mode .navbar {
     font-size: 0.9rem;
     max-width: 85%;
     line-height: 1.4;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .message.system {
