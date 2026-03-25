@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>07gold - Buy & Sell OSRS Gold Instantly</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='bluePhatGradient' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%231d4ed8;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z' fill='url(%23bluePhatGradient)' /%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -20,6 +20,27 @@
             <span>Online Users: <strong id="user-count">24</strong></span>
             <span>Active Chats: <strong id="active-chat-count">0</strong></span>
         </div>
+
+        <!-- Moved Rate Management Section -->
+        <div class="admin-rate-controls">
+            <div class="rate-control-item">
+                <span class="rate-label">BUY</span>
+                <div class="rate-actions">
+                    <button id="buy-rate-down" class="rate-btn">-</button>
+                    <span id="admin-buy-rate" class="rate-val">0.225</span>
+                    <button id="buy-rate-up" class="rate-btn">+</button>
+                </div>
+            </div>
+            <div class="rate-control-item">
+                <span class="rate-label">SELL</span>
+                <div class="rate-actions">
+                    <button id="sell-rate-down" class="rate-btn">-</button>
+                    <span id="admin-sell-rate" class="rate-val">0.185</span>
+                    <button id="sell-rate-up" class="rate-btn">+</button>
+                </div>
+            </div>
+        </div>
+
         <button id="logout-btn" class="logout-link">Logout</button>
     </div>
 
@@ -27,10 +48,12 @@
         <div class="dashboard-header">
             <h3>Live Support Dashboard</h3>
         </div>
+        
         <div id="admin-active-chats" class="admin-active-chats">
             <div class="no-chats">Waiting for user messages...</div>
         </div>
-        <!-- Admin Reply View (Hidden until a chat is selected) -->
+
+        <!-- Admin Reply View (Restored) -->
         <div id="admin-reply-view" class="admin-reply-view" style="display: none;">
             <div class="reply-header">
                 <button id="back-to-list" class="back-btn">←</button>
@@ -51,15 +74,32 @@
         <div class="video-overlay"></div>
     </div>
     <nav class="navbar">
-        <div class="brand-container">
-            <div class="logo-icon">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" fill="#FFD700" stroke="#DAA520" stroke-width="5"/>
-                    <text x="50" y="65" font-family="Inter" font-weight="800" font-size="40" fill="#1a1a1a" text-anchor="middle">07</text>
-                </svg>
+        <a href="index.html" class="brand-link">
+            <div class="brand-container">
+                <div class="logo-icon blue-phat">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bluePhatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#2563eb;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="phatGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="2" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+                        <!-- Zig-Zag Crown Shape (OSRS Style) -->
+                        <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z" fill="url(#bluePhatGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1" filter="url(#phatGlow)" />
+                        <!-- Texture/Depth -->
+                        <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="2" />
+                        <!-- Inner Highlights -->
+                        <path d="M20 80 L18 60 L25 65 L40 45 L55 65 L70 45 L82 65 L88 60 L85 80 Z" fill="rgba(255,255,255,0.15)" />
+                    </svg>
+                </div>
+                <div class="logo-text">07<span>gold</span></div>
             </div>
-            <div class="logo-text">07<span>gold</span></div>
-        </div>
+        </a>
         <ul class="nav-links">
             <li><a href="#buy">Buy Gold</a></li>
             <li><a href="#sell">Sell Gold</a></li>
@@ -88,7 +128,11 @@
                 <div class="calculator-content">
                     <div class="input-group">
                         <label>Gold Amount (M)</label>
-                        <input type="number" id="gold-amount" value="100" min="10">
+                        <input type="number" id="gold-amount" value="1" min="1">
+                        <div class="quick-select">
+                            <button type="button" class="select-btn" data-amount="100">100M</button>
+                            <button type="button" class="select-btn" data-amount="1000">1000M</button>
+                        </div>
                     </div>
                     <div class="input-group">
                         <label>Total Price (USD)</label>
@@ -126,10 +170,22 @@
             <div class="bento-card card-medium payments-card">
                 <h3>Secure Payments</h3>
                 <div class="payment-icons">
-                    <span>Crypto</span>
-                    <span>Visa</span>
-                    <span>MC</span>
-                    <span>Apple Pay</span>
+                    <div class="pay-icon" title="Bitcoin">
+                        <img src="btc.png" alt="BTC" class="crypto-img">
+                        <span>BTC</span>
+                    </div>
+                    <div class="pay-icon" title="USDT">
+                        <img src="usdt.jpg" alt="USDT" class="crypto-img">
+                        <span>USDT</span>
+                    </div>
+                    <div class="pay-icon" title="Litecoin">
+                        <img src="ltc.png" alt="LTC" class="crypto-img">
+                        <span>LTC</span>
+                    </div>
+                    <div class="pay-icon" title="Visa/Mastercard">
+                        <span class="text-icon">💳</span>
+                        <span>Card</span>
+                    </div>
                 </div>
                 <p>Instant delivery upon confirmation.</p>
             </div>
@@ -141,25 +197,38 @@
     </footer>
 
     <div class="chat-widget" id="chat-widget">
+        <div class="chat-label">Chat with us!</div>
         <button class="chat-toggle" id="chat-toggle">
-            <span class="chat-icon">💬</span>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 13.4876 3.36093 14.891 4 16.1272L3 21L7.8728 20C9.10898 20.6391 10.5124 21 12 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </button>
         <div class="chat-window" id="chat-window">
             <div class="chat-header">
-                <div class="header-info">
-                    <div class="status-dot"></div>
-                    <h3>07gold Support</h3>
+                <div class="header-main">
+                    <div class="agent-avatar">
+                        <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23FFD700%22/><text x=%2250%%22 y=%2250%%22 dy=%22.35em%22 text-anchor=%22middle%22 font-size=%2250%22 fill=%22%231a1a1a%22 font-family=%22Inter%22 font-weight=%22800%22>S</text></svg>" alt="Support">
+                        <div class="online-dot-pulsing"></div>
+                    </div>
+                    <div class="header-text">
+                        <h3>07gold Support</h3>
+                        <span>24/7 Live Chat</span>
+                    </div>
                 </div>
                 <button class="close-chat" id="close-chat">×</button>
             </div>
             <div class="chat-messages" id="chat-messages">
                 <div class="message system">
-                    Welcome to 07gold! How can we help you today?
+                    👋 Welcome! How can we help you today?
                 </div>
             </div>
             <div class="chat-input-area">
                 <input type="text" id="chat-input" placeholder="Type a message...">
-                <button id="send-msg">Send</button>
+                <button id="send-msg">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
