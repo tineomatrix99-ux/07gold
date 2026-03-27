@@ -76,26 +76,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const getStartedBtn = document.querySelector('.calculator-card .primary-cta');
     getStartedBtn.addEventListener('click', () => {
         const amount = goldInput.value;
-        const type = currentMode;
+        const type = currentMode.toUpperCase();
         
-        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
+        if (typeof $crisp !== 'undefined') {
+            // 1. Open the chat
+            $crisp.push(["do", "chat:open"]);
             
-            // 1. Set the 'Order' attribute IMMEDIATELY
-            window.Tawk_API.setAttributes({
-                'name': `Player ([Order])`,
-                'Order': `${type.toUpperCase()} ${amount}M`
-            }, function(error){});
+            // 2. Set the visitor's name/data so you see it in your dashboard
+            $crisp.push(["set", "user:nickname", [`Player (${type} ${amount}M)`]]);
+            $crisp.push(["set", "session:data", [[["order_type", type], ["amount", amount + "M"]]]]);
 
-            // 2. Wait a tiny bit then maximize
+            // 3. Show an automatic message TO the customer in the chat
             setTimeout(() => {
-                if (typeof window.Tawk_API.maximize === 'function') {
-                    window.Tawk_API.maximize();
-                }
-            }, 200);
-
-            console.log("Order details sent to Tawk.to dashboard.");
+                $crisp.push(["do", "message:show", ["text", `Hey! I see you want to ${type} ${amount}M gold. One moment while I check the stock and get you a trade location! 🛡️`]]);
+            }, 500);
+            
+            console.log("Order details sent to Crisp.");
         } else {
-            alert("Chat is still loading. Please wait 2 seconds or click the bubble.");
+            alert("Chat is still loading. Please wait a second or click the bubble.");
         }
     });
 
@@ -110,12 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAdmin = localStorage.getItem('isAdmin') === 'true';
 
     function updateAdminUI() {
-        const getStartedBtn = document.querySelector('.calculator-card .primary-cta');
         if (isAdmin) {
             document.body.classList.add('admin-mode');
             adminBar.style.display = 'flex';
             openLogin.style.setProperty('display', 'none', 'important');
-            if (getStartedBtn) getStartedBtn.style.display = 'none';
         } else {
             document.body.classList.remove('admin-mode');
             adminBar.style.display = 'none';
