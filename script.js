@@ -77,21 +77,27 @@ document.addEventListener('DOMContentLoaded', () => {
     getStartedBtn.addEventListener('click', () => {
         const amount = goldInput.value;
         const type = currentMode;
-
+        
         const originalText = getStartedBtn.textContent;
         getStartedBtn.textContent = "Connecting to Support...";
         getStartedBtn.style.opacity = "0.7";
         getStartedBtn.disabled = true;
 
-        if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
-            window.Tawk_API.maximize();
-
-            // 1. Update the visitor's name in your dashboard
+        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
+            
+            // 1. SET ATTRIBUTES FIRST (so they exist for the trigger)
             window.Tawk_API.setAttributes({
                 'name': `Player (${type.toUpperCase()} ${amount}M)`,
                 'intent': type,
                 'amount': amount + 'M'
             }, function(error){});
+
+            // 2. THEN MAXIMIZE (this fires the trigger)
+            setTimeout(() => {
+                if (typeof window.Tawk_API.maximize === 'function') {
+                    window.Tawk_API.maximize();
+                }
+            }, 100);
 
             console.log("Order submitted to dashboard.");
 
