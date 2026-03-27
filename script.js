@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 1. Set the 'Order' attribute IMMEDIATELY
             window.Tawk_API.setAttributes({
-                'name': `Player (${type.toUpperCase()} ${amount}M)`,
+                'name': `Player ([Order])`,
                 'Order': `${type.toUpperCase()} ${amount}M`
             }, function(error){});
 
