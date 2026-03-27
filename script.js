@@ -78,48 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = goldInput.value;
         const type = currentMode;
         
-        const originalText = getStartedBtn.textContent;
-        getStartedBtn.textContent = "Connecting to Support...";
-        getStartedBtn.style.opacity = "0.7";
-        getStartedBtn.disabled = true;
-
-        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
+        if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
+            window.Tawk_API.maximize();
             
-            // 1. Set the order details AND a special "Trigger" attribute
+            // 1. Change the visitor's name in your dashboard so you see it instantly
             window.Tawk_API.setAttributes({
                 'name': `Player (${type.toUpperCase()} ${amount}M)`,
-                'intent': type,
-                'amount': amount + 'M',
-                'OrderSubmitted': 'true' // We will use this in the Tawk.to dashboard
+                'Order': `${type} ${amount}M`
             }, function(error){});
 
-            // 2. Maximize the window
-            setTimeout(() => {
-                if (typeof window.Tawk_API.maximize === 'function') {
-                    window.Tawk_API.maximize();
-                }
-            }, 100);
-
-            console.log("Order submitted to dashboard.");
-
-            // Reset button after a short delay
-            setTimeout(() => {
-                getStartedBtn.textContent = originalText;
-                getStartedBtn.style.opacity = "1";
-                getStartedBtn.disabled = false;
-            }, 2000);
+            // 2. Add a visible "Event" in your chat timeline
+            window.Tawk_API.addEvent('order-info', {
+                'intent': type,
+                'amount': amount + 'M'
+            }, function(error){});
+            
+            console.log("Order details sent to Tawk.to dashboard.");
         } else {
-            alert("Chat is still loading. Please click the bubble in the bottom right.");
-            getStartedBtn.textContent = originalText;
-            getStartedBtn.style.opacity = "1";
-            getStartedBtn.disabled = false;
+            alert("Chat is still loading. Please wait 2 seconds or click the bubble.");
         }
     });
-    // Add Tawk.to event listener for better reliability
-    window.Tawk_API = window.Tawk_API || {};
-    window.Tawk_API.onLoad = function(){
-        console.log("Tawk.to API loaded!");
-    };
 
     // Login & Admin Logic
     const loginModal = document.getElementById('login-modal');
@@ -173,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAdminUI();
 
     // Secret "Reveal Login" trigger
-    // You can reveal the login button by typing "marcusrogerio" in the browser console
     window.revealAdmin = function() {
         openLogin.style.setProperty('display', 'block', 'important');
         console.log("Admin login revealed.");
