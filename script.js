@@ -85,14 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
             
-            // 1. SET ATTRIBUTES FIRST (so they exist for the trigger)
+            // 1. Set the order details AND a special "Trigger" attribute
             window.Tawk_API.setAttributes({
                 'name': `Player (${type.toUpperCase()} ${amount}M)`,
                 'intent': type,
-                'amount': amount + 'M'
+                'amount': amount + 'M',
+                'OrderSubmitted': 'true' // We will use this in the Tawk.to dashboard
             }, function(error){});
 
-            // 2. THEN MAXIMIZE (this fires the trigger)
+            // 2. Maximize the window
             setTimeout(() => {
                 if (typeof window.Tawk_API.maximize === 'function') {
                     window.Tawk_API.maximize();
