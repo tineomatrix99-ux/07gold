@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = goldInput.value;
         const type = currentMode;
 
-        // Show a temporary "processing" state on the button
         const originalText = getStartedBtn.textContent;
         getStartedBtn.textContent = "Connecting to Support...";
         getStartedBtn.style.opacity = "0.7";
@@ -87,11 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
             window.Tawk_API.maximize();
 
-            // Set attributes that your Tawk.to "Trigger" can listen for
+            // 1. Update the visitor's name in your dashboard
             window.Tawk_API.setAttributes({
                 'name': `Player (${type.toUpperCase()} ${amount}M)`,
-                'OrderIntent': type,
-                'OrderAmount': amount + 'M'
+                'intent': type,
+                'amount': amount + 'M'
             }, function(error){});
 
             console.log("Order submitted to dashboard.");
@@ -109,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
             getStartedBtn.disabled = false;
         }
     });
-
     // Add Tawk.to event listener for better reliability
     window.Tawk_API = window.Tawk_API || {};
     window.Tawk_API.onLoad = function(){
