@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         priceDisplay.textContent = total;
         
         // Also update the "Live Rate" card on the UI
-        const liveRateEl = document.querySelector('.price-card .rate');
+        const liveRateEl = document.querySelector('.rate-card .rate');
         if (liveRateEl) liveRateEl.textContent = `$${parseFloat(rate.toFixed(3))}`;
     }
 
@@ -81,22 +81,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const openTawk = () => {
             if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
                 Tawk_API.maximize();
+                // Send attributes so you know their intent in the dashboard
                 Tawk_API.setAttributes({
-                    'Order': `${type} ${amount}M`
+                    'Intent': type,
+                    'Amount': amount + 'M'
                 }, function(error){});
+            } else {
+                 alert(`Please use the chat bubble to ${type} ${amount}M gold!`);
             }
         };
 
-        // If API is ready, open it. If not, wait for it.
         if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
             openTawk();
         } else {
-            // Tawk_API might not be initialized yet
-            alert("Chat is loading... please try again in a second or click the bubble.");
-            window.Tawk_API = window.Tawk_API || {};
-            window.Tawk_API.onLoad = function() {
-                openTawk();
-            };
+            alert("Chat is still loading. Please wait a second or click the chat bubble in the corner.");
         }
     });
 
@@ -131,8 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const user = e.target.querySelector('input[type="text"]').value;
         const pass = e.target.querySelector('input[type="password"]').value;
 
-        // Note: This is still a frontend-only check. 
-        // For true security, this should be handled by a backend server.
         if (user === '07gold' && pass === '123') {
             isAdmin = true;
             localStorage.setItem('isAdmin', 'true');
@@ -148,17 +144,15 @@ document.addEventListener('DOMContentLoaded', () => {
         isAdmin = false;
         localStorage.setItem('isAdmin', 'false');
         updateAdminUI();
-        location.reload(); // Refresh to clean state
+        location.reload(); 
     });
 
     updateAdminUI();
 
-    // Hidden Admin Reveal Command
-    window.addEventListener('keypress', (e) => {
-        // You can add a hidden key combo here if you want to reveal the login button
-        // For now, it stays revealed by your "marcusrogerio" command in your thoughts
-    });
-
-    // Handle "marcusrogerio" trigger via a simple console or hidden input if needed
-    // But for a static site, we'll keep the login button accessible for you.
+    // Secret "Reveal Login" trigger
+    // You can reveal the login button by typing "marcusrogerio" in the browser console
+    window.revealAdmin = function() {
+        openLogin.style.setProperty('display', 'block', 'important');
+        console.log("Admin login revealed.");
+    };
 });
