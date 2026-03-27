@@ -75,19 +75,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get Started Button Logic
     const getStartedBtn = document.querySelector('.calculator-card .primary-cta');
     getStartedBtn.addEventListener('click', () => {
-        console.log("V5: Button clicked");
         const amount = goldInput.value;
         const type = currentMode;
-        
+
         if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
-            console.log("V5: Tawk_API found, maximizing...");
             window.Tawk_API.maximize();
-            // Identify the order in your dashboard
+
+            // 1. Change the visitor's name in your dashboard so you see it instantly
             window.Tawk_API.setAttributes({
+                'name': `Player (${type.toUpperCase()} ${amount}M)`,
                 'Order': `${type} ${amount}M`
-            });
+            }, function(error){});
+
+            // 2. Add a visible "Event" in your chat timeline
+            window.Tawk_API.addEvent('order-info', {
+                'intent': type,
+                'amount': amount + 'M'
+            }, function(error){});
+
+            console.log("Order details sent to Tawk.to dashboard.");
         } else {
-            console.log("V5: Tawk_API NOT found yet.");
             alert("Chat is still loading. Please wait 2 seconds or click the bubble.");
         }
     });
