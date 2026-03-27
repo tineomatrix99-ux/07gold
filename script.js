@@ -78,23 +78,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = goldInput.value;
         const type = currentMode;
         
-        const openTawk = () => {
-            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
-                Tawk_API.maximize();
-                // Send attributes so you know their intent in the dashboard
-                Tawk_API.setAttributes({
-                    'Intent': type,
-                    'Amount': amount + 'M'
-                }, function(error){});
-            } else {
-                 alert(`Please use the chat bubble to ${type} ${amount}M gold!`);
-            }
-        };
+        // Try multiple ways to find the Tawk.to API
+        const api = window.Tawk_API || Tawk_API;
 
-        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
-            openTawk();
+        if (api && typeof api.maximize === 'function') {
+            try {
+                api.maximize();
+                // Send attributes so you know their intent in the dashboard
+                if (typeof api.setAttributes === 'function') {
+                    api.setAttributes({
+                        'Intent': type,
+                        'Amount': amount + 'M'
+                    }, function(error){});
+                }
+            } catch (e) {
+                console.error("Tawk.to error:", e);
+                // Fallback to toggle if maximize fails
+                if (typeof api.toggle === 'function') api.toggle();
+            }
         } else {
-            alert("Chat is still loading. Please wait a second or click the chat bubble in the corner.");
+            // If API not found, show instructions
+            alert(`Ready to ${type} ${amount}M gold? Click the chat bubble in the bottom right to start!`);
         }
     });
 
