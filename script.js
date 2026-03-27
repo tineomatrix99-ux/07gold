@@ -75,26 +75,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get Started Button Logic
     const getStartedBtn = document.querySelector('.calculator-card .primary-cta');
     getStartedBtn.addEventListener('click', () => {
+        console.log("Get Started button clicked");
         const amount = goldInput.value;
-        const type = currentMode === 'buy' ? 'buy' : 'sell';
+        const type = currentMode;
         
         // Open the professional chat widget if available
         if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+            console.log("Tawk_API detected, attempting to maximize...");
             try {
                 Tawk_API.maximize();
+                // Optional: set attributes to identify the user's intent
                 Tawk_API.setAttributes({
                     'Order': `${type} ${amount}M`
                 }, function(error){});
             } catch (e) {
-                // Fallback if Tawk_API is partially loaded
-                console.log("Tawk.to partially loaded, but maximize worked.");
+                console.error("Error maximizing Tawk.to:", e);
+                alert("The chat is still loading. Please click the bubble in the bottom right corner.");
             }
-        } else if (typeof $crisp !== 'undefined') {
-            $crisp.push(["do", "chat:open"]);
-            $crisp.push(["set", "session:data", [[["Order", `${type} ${amount}M`]]]]);
+        } else if (window.Tawk_API && window.Tawk_API.maximize) {
+             window.Tawk_API.maximize();
         } else {
-            // Last resort: Show alert if Tawk hasn't loaded yet
-            alert(`Please wait a moment for the chat to load, or use the chat bubble below to ${type} ${amount}M gold!`);
+            console.log("Tawk_API not found yet.");
+            alert(`Chat is loading. Once the bubble appears in the corner, you can ${type} your ${amount}M gold!`);
         }
     });
 
