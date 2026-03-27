@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07gold - Buy & Sell OSRS Gold Instantly</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='bluePhatGradient' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%231d4ed8;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z' fill='url(%23bluePhatGradient)' /%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/69c67c61c18deb1c38624670/1jknlbnpv';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+</head>
+<body>
+    <div id="admin-bar" class="admin-bar" style="display: none;">
+        <div class="admin-status">
+            <span class="status-dot"></span>
+            <strong>ADMIN MODE</strong>
+        </div>
+        <div class="admin-stats">
+            <span>Online Users: <strong id="user-count">24</strong></span>
+        </div>
+
+        <!-- Moved Rate Management Section -->
+        <div class="admin-rate-controls">
+            <div class="rate-control-item">
+                <span class="rate-label">BUY</span>
+                <div class="rate-actions">
+                    <button id="buy-rate-down" class="rate-btn">-</button>
+                    <span id="admin-buy-rate" class="rate-val">0.225</span>
+                    <button id="buy-rate-up" class="rate-btn">+</button>
+                </div>
+            </div>
+            <div class="rate-control-item">
+                <span class="rate-label">SELL</span>
+                <div class="rate-actions">
+                    <button id="sell-rate-down" class="rate-btn">-</button>
+                    <span id="admin-sell-rate" class="rate-val">0.185</span>
+                    <button id="sell-rate-up" class="rate-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <button id="logout-btn" class="logout-link">Logout</button>
+    </div>
+
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video" playsinline>
+            <source src="os-download-background.webm" type="video/webm">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    <nav class="navbar">
+        <a href="index.html" class="brand-link">
+            <div class="brand-container">
+                <div class="logo-icon blue-phat">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bluePhatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#2563eb;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="phatGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="2" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+                        <!-- Zig-Zag Crown Shape (OSRS Style) -->
+                        <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z" fill="url(#bluePhatGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1" filter="url(#phatGlow)" />
+                        <!-- Texture/Depth -->
+                        <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="2" />
+                        <!-- Inner Highlights -->
+                        <path d="M20 80 L18 60 L25 65 L40 45 L55 65 L70 45 L82 65 L88 60 L85 80 Z" fill="rgba(255,255,255,0.15)" />
+                    </svg>
+                </div>
+                <div class="logo-text">07<span>gold</span></div>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#buy">Buy Gold</a></li>
+            <li><a href="#sell">Sell Gold</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#support">Support</a></li>
+        </ul>
+        <button class="login-btn" id="open-login">Log In</button>
+    </nav>
+
+    <main class="container">
+        <header class="hero">
+            <h1>Buy & Sell OSRS Gold <br><span class="highlight">Instantly.</span></h1>
+            <p>Institutional-grade security. Real-time OSRS gold rates. No bans, just gains.</p>
+        </header>
+
+        <section class="bento-grid">
+            <!-- Calculator Card -->
+            <div class="bento-card card-large calculator-card">
+                <div class="card-header">
+                    <h2>Live Calculator</h2>
+                    <div class="toggle">
+                        <button id="buy-btn" class="active">Buy</button>
+                        <button id="sell-btn">Sell</button>
+                    </div>
+                </div>
+                <div class="calculator-content">
+                    <div class="input-group">
+                        <label>Gold Amount (M)</label>
+                        <input type="number" id="gold-amount" value="1" min="1">
+                        <div class="quick-select">
+                            <button type="button" class="select-btn" data-amount="100">100M</button>
+                            <button type="button" class="select-btn" data-amount="1000">1000M</button>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Total Price (USD)</label>
+                        <div class="price-display">$<span id="total-price">35.00</span></div>
+                    </div>
+                </div>
+                <button class="primary-cta">Get Started</button>
+            </div>
+
+            <!-- Price Card -->
+            <div class="bento-card card-small price-card">
+                <h3>Live OSRS Rate</h3>
+                <div class="rate-display">
+                    <span class="symbol">1M</span>
+                    <span class="rate">$0.35</span>
+                </div>
+                <div class="trend up">+2.4% (24h)</div>
+            </div>
+
+            <!-- Trust Card -->
+            <div class="bento-card card-small trust-card">
+                <h3>Trusted by Players</h3>
+                <div class="trust-score">4.9/5</div>
+                <p>Over 10,000 successful trades completed this month.</p>
+            </div>
+
+            <!-- Security Card -->
+            <div class="bento-card card-medium security-card">
+                <h3>Anti-Ban Protection</h3>
+                <p>Our proprietary transfer methods ensure 100% account safety. Zero bans reported in 2024-2025.</p>
+                <div class="shield-icon">🛡️</div>
+            </div>
+
+            <!-- Payment Methods Card -->
+            <div class="bento-card card-medium payments-card">
+                <h3>Secure Payments</h3>
+                <div class="payment-icons">
+                    <div class="pay-icon" title="USDT">
+                        <img src="usdt.jpg" alt="USDT" class="crypto-img">
+                        <span>USDT</span>
+                    </div>
+                    <div class="pay-icon" title="Litecoin">
+                        <img src="ltc.png" alt="LTC" class="crypto-img">
+                        <span>LTC</span>
+                    </div>
+                </div>
+                <p>Instant delivery upon confirmation.</p>
+            </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">07<span>gold</span></div>
+        <p>© 2026 07gold. All rights reserved. Not affiliated with Jagex.</p>
+    </footer>
+
+    <div class="modal-overlay" id="login-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-login">×</button>
+            <div class="modal-header">
+                <h2>Admin Login</h2>
+                <p>Institutional Access Only</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" placeholder="Enter username" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="primary-cta">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
