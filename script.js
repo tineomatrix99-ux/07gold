@@ -75,28 +75,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get Started Button Logic
     const getStartedBtn = document.querySelector('.calculator-card .primary-cta');
     getStartedBtn.addEventListener('click', () => {
-        console.log("Get Started button clicked");
         const amount = goldInput.value;
         const type = currentMode;
         
-        // Open the professional chat widget if available
-        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
-            console.log("Tawk_API detected, attempting to maximize...");
-            try {
+        const openTawk = () => {
+            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
                 Tawk_API.maximize();
-                // Optional: set attributes to identify the user's intent
                 Tawk_API.setAttributes({
                     'Order': `${type} ${amount}M`
                 }, function(error){});
-            } catch (e) {
-                console.error("Error maximizing Tawk.to:", e);
-                alert("The chat is still loading. Please click the bubble in the bottom right corner.");
             }
-        } else if (window.Tawk_API && window.Tawk_API.maximize) {
-             window.Tawk_API.maximize();
+        };
+
+        // If API is ready, open it. If not, wait for it.
+        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+            openTawk();
         } else {
-            console.log("Tawk_API not found yet.");
-            alert(`Chat is loading. Once the bubble appears in the corner, you can ${type} your ${amount}M gold!`);
+            // Tawk_API might not be initialized yet
+            alert("Chat is loading... please try again in a second or click the bubble.");
+            window.Tawk_API = window.Tawk_API || {};
+            window.Tawk_API.onLoad = function() {
+                openTawk();
+            };
         }
     });
 
