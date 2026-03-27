@@ -78,21 +78,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = goldInput.value;
         const type = currentMode;
         
-        if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
-            window.Tawk_API.maximize();
+        if (window.Tawk_API && typeof window.Tawk_API.setAttributes === 'function') {
             
-            // 1. Change the visitor's name in your dashboard so you see it instantly
+            // 1. Set the 'Order' attribute IMMEDIATELY
             window.Tawk_API.setAttributes({
                 'name': `Player (${type.toUpperCase()} ${amount}M)`,
-                'Order': `${type} ${amount}M`
+                'Order': `${type.toUpperCase()} ${amount}M`
             }, function(error){});
 
-            // 2. Add a visible "Event" in your chat timeline
-            window.Tawk_API.addEvent('order-info', {
-                'intent': type,
-                'amount': amount + 'M'
-            }, function(error){});
-            
+            // 2. Wait a tiny bit then maximize
+            setTimeout(() => {
+                if (typeof window.Tawk_API.maximize === 'function') {
+                    window.Tawk_API.maximize();
+                }
+            }, 200);
+
             console.log("Order details sent to Tawk.to dashboard.");
         } else {
             alert("Chat is still loading. Please wait 2 seconds or click the bubble.");
