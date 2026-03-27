@@ -78,23 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = goldInput.value;
         const type = currentMode.toUpperCase();
         
-        if (typeof $crisp !== 'undefined') {
-            // 1. Open the chat
-            $crisp.push(["do", "chat:open"]);
-            
-            // 2. Set the visitor's name/data so you see it in your dashboard
-            $crisp.push(["set", "user:nickname", [`Player (${type} ${amount}M)`]]);
-            $crisp.push(["set", "session:data", [[["order_type", type], ["amount", amount + "M"]]]]);
-
-            // 3. Show an automatic message TO the customer in the chat
-            setTimeout(() => {
-                $crisp.push(["do", "message:show", ["text", `Hey! I see you want to ${type} ${amount}M gold. One moment while I check the stock and get you a trade location! 🛡️`]]);
-            }, 500);
-            
-            console.log("Order details sent to Crisp.");
-        } else {
-            alert("Chat is still loading. Please wait a second or click the bubble.");
-        }
+        alert(`Please use the chat bubble to ${type} ${amount}M gold!`);
     });
 
     // Login & Admin Logic
