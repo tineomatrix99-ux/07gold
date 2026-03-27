@@ -79,14 +79,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = goldInput.value;
         const type = currentMode;
         
-        // Try multiple ways to find the Tawk.to API
         const api = window.Tawk_API || Tawk_API;
 
         if (api && typeof api.maximize === 'function') {
-            console.log("Tawk.to API found, maximizing...");
+            console.log("Tawk.to API found. Executing show + maximize sequence...");
             try {
+                // 1. Ensure widget is visible
+                if (typeof api.showWidget === 'function') api.showWidget();
+                
+                // 2. Maximize the window
                 api.maximize();
-                // Send attributes so you know their intent in the dashboard
+                
+                // 3. Set order attributes
                 if (typeof api.setAttributes === 'function') {
                     api.setAttributes({
                         'Intent': type,
@@ -94,14 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, function(error){});
                 }
             } catch (e) {
-                console.error("Tawk.to error:", e);
-                // Fallback to toggle if maximize fails
+                console.error("Tawk.to execution error:", e);
                 if (typeof api.toggle === 'function') api.toggle();
             }
         } else {
-            console.log("Tawk.to API not found yet.");
-            // If API not found, show instructions
-            alert(`Ready to ${type} ${amount}M gold? Click the chat bubble in the bottom right to start!`);
+            console.log("Tawk.to API not ready. Alerting user.");
+            alert(`Ready to ${type} ${amount}M gold? Click the chat bubble in the bottom right!`);
         }
     });
 
