@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get Started Button Logic
     const getStartedBtn = document.querySelector('.calculator-card .primary-cta');
     getStartedBtn.addEventListener('click', () => {
+        console.log("Get Started button clicked");
         const amount = goldInput.value;
         const type = currentMode;
         
@@ -82,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const api = window.Tawk_API || Tawk_API;
 
         if (api && typeof api.maximize === 'function') {
+            console.log("Tawk.to API found, maximizing...");
             try {
                 api.maximize();
                 // Send attributes so you know their intent in the dashboard
@@ -97,10 +99,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof api.toggle === 'function') api.toggle();
             }
         } else {
+            console.log("Tawk.to API not found yet.");
             // If API not found, show instructions
             alert(`Ready to ${type} ${amount}M gold? Click the chat bubble in the bottom right to start!`);
         }
     });
+
+    // Add Tawk.to event listener for better reliability
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_API.onLoad = function(){
+        console.log("Tawk.to API loaded!");
+    };
 
     // Login & Admin Logic
     const loginModal = document.getElementById('login-modal');
