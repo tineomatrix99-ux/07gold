@@ -79,16 +79,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const type = currentMode === 'buy' ? 'buy' : 'sell';
         
         // Open the professional chat widget if available
-        if (typeof Tawk_API !== 'undefined') {
-            Tawk_API.maximize();
-            Tawk_API.setAttributes({
-                'Order': `${type} ${amount}M`
-            }, function(error){});
+        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+            try {
+                Tawk_API.maximize();
+                Tawk_API.setAttributes({
+                    'Order': `${type} ${amount}M`
+                }, function(error){});
+            } catch (e) {
+                // Fallback if Tawk_API is partially loaded
+                console.log("Tawk.to partially loaded, but maximize worked.");
+            }
         } else if (typeof $crisp !== 'undefined') {
             $crisp.push(["do", "chat:open"]);
             $crisp.push(["set", "session:data", [[["Order", `${type} ${amount}M`]]]]);
         } else {
-            alert(`Please use the chat bubble to ${type} ${amount}M gold!`);
+            // Last resort: Show alert if Tawk hasn't loaded yet
+            alert(`Please wait a moment for the chat to load, or use the chat bubble below to ${type} ${amount}M gold!`);
         }
     });
 
