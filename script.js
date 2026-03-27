@@ -78,24 +78,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = goldInput.value;
         const type = currentMode;
 
+        // Show a temporary "processing" state on the button
+        const originalText = getStartedBtn.textContent;
+        getStartedBtn.textContent = "Connecting to Support...";
+        getStartedBtn.style.opacity = "0.7";
+        getStartedBtn.disabled = true;
+
         if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
             window.Tawk_API.maximize();
 
-            // 1. Change the visitor's name in your dashboard so you see it instantly
+            // Set attributes that your Tawk.to "Trigger" can listen for
             window.Tawk_API.setAttributes({
                 'name': `Player (${type.toUpperCase()} ${amount}M)`,
-                'Order': `${type} ${amount}M`
+                'OrderIntent': type,
+                'OrderAmount': amount + 'M'
             }, function(error){});
 
-            // 2. Add a visible "Event" in your chat timeline
-            window.Tawk_API.addEvent('order-info', {
-                'intent': type,
-                'amount': amount + 'M'
-            }, function(error){});
+            console.log("Order submitted to dashboard.");
 
-            console.log("Order details sent to Tawk.to dashboard.");
+            // Reset button after a short delay
+            setTimeout(() => {
+                getStartedBtn.textContent = originalText;
+                getStartedBtn.style.opacity = "1";
+                getStartedBtn.disabled = false;
+            }, 2000);
         } else {
-            alert("Chat is still loading. Please wait 2 seconds or click the bubble.");
+            alert("Chat is still loading. Please click the bubble in the bottom right.");
+            getStartedBtn.textContent = originalText;
+            getStartedBtn.style.opacity = "1";
+            getStartedBtn.disabled = false;
         }
     });
 
