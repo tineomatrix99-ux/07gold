@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - 07gold | Trusted OSRS Gold Exchange</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='bluePhatGradient' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%231d4ed8;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z' fill='url(%23bluePhatGradient)' /%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .reviews-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .reviews-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .reviews-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .review-card:hover {
+            border-color: var(--gold);
+            background: var(--card-bg-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .review-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid var(--card-border);
+        }
+
+        .user-info h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .verified-badge {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .user-info span {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .review-content {
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .review-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .source-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        .read-more-btn {
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 5px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            text-decoration: underline;
+        }
+
+        .read-more-btn:hover {
+            filter: brightness(1.2);
+        }
+
+        .review-modal-content {
+            max-width: 600px !important;
+        }
+
+        @media (max-width: 600px) {
+            .reviews-header h1 {
+                font-size: 2.5rem;
+            }
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="brand-link">
+            <div class="brand-container">
+                <div class="logo-icon blue-phat">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bluePhatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#2563eb;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z" fill="url(#bluePhatGradient)" />
+                    </svg>
+                </div>
+                <div class="logo-text">07<span>gold</span></div>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#buy">Buy Gold</a></li>
+            <li><a href="index.html#sell">Sell Gold</a></li>
+            <li><a href="reviews.html" class="active">Reviews</a></li>
+            <li><a href="index.html#support">Support</a></li>
+        </ul>
+        <button class="login-btn" id="open-login">Log In</button>
+    </nav>
+
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video" playsinline>
+            <source src="os-download-background.webm" type="video/webm">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <main class="reviews-container">
+        <header class="reviews-header">
+            <h1>Customer <span class="highlight">Vouches</span></h1>
+            <p>We pride ourselves on transparency and reliability. Here's what the OSRS community has to say about our services on Sythe.org.</p>
+        </header>
+
+        <div class="reviews-grid">
+            <!-- New Review Card: kizaro -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="kizaro.gif" alt="kizaro Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>kizaro <span class="verified-badge">✓</span></h3>
+                        <span>Trusted User</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "vouch, sold us gp thanks alot"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- New Review Card: fairy -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="fairy.gif" alt="fairy Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>fairy <span class="verified-badge">✓</span></h3>
+                        <span>Active Member</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "bought gp from me thank you"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- New Review Card: garret -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="garret.png" alt="garret Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>garret <span class="verified-badge">✓</span></h3>
+                        <span>Elite Member</span>
+                    </div>
+                </div>
+                <div class="review-content" id="garret-comment">
+                    "Honestly, Marcus is an amazing Runescaper if I do say so myself. He has not only sold gold to me but also purchased gold from me..."
+                    <button class="read-more-btn" onclick="openReviewModal('garret')">Read More</button>
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- New Review Card: jimsky -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="jimsky.webp" alt="jimsky Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>jimsky <span class="verified-badge">✓</span></h3>
+                        <span>Elite Trader</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "Sold us some OSRS Gold, quick and easy ! thanks bro"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- New Review Card: Yanliliz -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="Yanliliz.gif" alt="Yanliliz Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>Yanliliz <span class="verified-badge">✓</span></h3>
+                        <span>Trusted Trader</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "Sold me 904m osrs gold ty guy"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- New Review Card: RS07Shop -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="RS07SHOP.gif" alt="RS07Shop Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>RS07Shop <span class="verified-badge">✓</span></h3>
+                        <span>Official Partner</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "Bought 600m from us A++ Tyvm :)"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- New Review Card: RAYMON -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="RAYMON.gif" alt="RAYMON Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>RAYMON <span class="verified-badge">✓</span></h3>
+                        <span>Trusted User</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "Sold me 100m all good"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- New Review Card: ATW -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="ATW.gif" alt="ATW Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>ATW <span class="verified-badge">✓</span></h3>
+                        <span>Elite Member</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "sold me 1.4b, smooth trade tyty"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- New Review Card -->
+            <div class="review-card">
+                <div class="review-user">
+                    <img src="RPGSTASH.gif" alt="RPGStash Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>RPGStash <span class="verified-badge">✓</span></h3>
+                        <span>Verified Merchant</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "Sold me 1b 07, thanks a lot"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- Review Card 1 -->
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="user-avatar brand-avatar">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z" fill="url(#bluePhatGradient)" />
+                        </svg>
+                    </div>
+                    <div class="user-info">
+                        <h3>Zamorakian <span class="verified-badge">✓</span></h3>
+                        <span>Member since 2019</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "Vouch for Marcus! Sold 450M OSRS gold. He was fast, professional, and the payment arrived in my LTC wallet within minutes. Highly recommend!"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- Review Card 2 -->
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="user-avatar brand-avatar">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z" fill="url(#bluePhatGradient)" />
+                        </svg>
+                    </div>
+                    <div class="user-info">
+                        <h3>IronManMode <span class="verified-badge">✓</span></h3>
+                        <span>Elite Trader</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "Bought 1B gold for a huge split. Marcus offered the best rates I could find. Safe transfer method used, no issues at all. Will be back."
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- Review Card 3 -->
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="user-avatar brand-avatar">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z" fill="url(#bluePhatGradient)" />
+                        </svg>
+                    </div>
+                    <div class="user-info">
+                        <h3>PurePker99 <span class="verified-badge">✓</span></h3>
+                        <span>Active Member</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "Quick and easy transaction. Sold 200M, got paid instantly via USDT. Marcus is a beast!"
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+
+            <!-- Review Card 4 -->
+            <div class="review-card">
+                <div class="review-user">
+                    <div class="user-avatar brand-avatar">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 85 L10 45 L25 55 L40 25 L55 55 L75 25 L85 55 L95 45 L90 85 Z" fill="url(#bluePhatGradient)" />
+                        </svg>
+                    </div>
+                    <div class="user-info">
+                        <h3>GELover <span class="verified-badge">✓</span></h3>
+                        <span>Vouched Member</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    "A+ service. Communication was great through Discord. The whole process took less than 10 minutes."
+                </div>
+                <div class="review-footer">
+                    <a href="https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/" target="_blank" class="source-link">View on Sythe</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">07<span>gold</span></div>
+        <p>© 2026 07gold. All rights reserved. Not affiliated with Jagex.</p>
+    </footer>
+
+    <div class="modal-overlay" id="review-modal">
+        <div class="modal-content review-modal-content">
+            <button class="modal-close" onclick="closeReviewModal()">×</button>
+            <div id="modal-review-user" class="review-user" style="margin-bottom: 2rem;"></div>
+            <div id="modal-review-text" class="review-content" style="font-size: 1.1rem; line-height: 1.8;"></div>
+        </div>
+    </div>
+
+    <script>
+        const fullReviews = {
+            'garret': {
+                user: `
+                    <img src="garret.png" alt="garret Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h3>garret <span class="verified-badge">✓</span></h3>
+                        <span>Elite Member</span>
+                    </div>
+                `,
+                text: `"Honestly, Marcus is an amazing Runescaper if I do say so myself. He has not only sold gold to me but also purchased gold from me - never screwed me and happy to do business any time of the day. The man even does services and I have trusted him with 5b+. I have access to a lot of gold buying, Marcus gets my business though due to the kind of man he is. Highly recommend and will be back for sure."`
+            }
+        };
+
+        function openReviewModal(userId) {
+            const review = fullReviews[userId];
+            if (review) {
+                document.getElementById('modal-review-user').innerHTML = review.user;
+                document.getElementById('modal-review-text').innerHTML = review.text;
+                document.getElementById('review-modal').classList.add('active');
+            }
+        }
+
+        function closeReviewModal() {
+            document.getElementById('review-modal').classList.remove('active');
+        }
+
+        // Close on overlay click
+        document.getElementById('review-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'review-modal') closeReviewModal();
+        });
+
+        // Make review cards clickable
+        document.querySelectorAll('.review-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Don't redirect if clicking "Read More" or the actual footer link
+                if (!e.target.closest('.read-more-btn') && !e.target.closest('.source-link')) {
+                    window.open('https://www.sythe.org/threads/buy-sell-osrs-gp-marcus-emprestimo-disc-vouches/', '_blank');
+                }
+            });
+        });
+    </script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/69c67c61c18deb1c38624670/1jknlbnpv';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+    <script src="script.js"></script>
+</body>
+</html>
