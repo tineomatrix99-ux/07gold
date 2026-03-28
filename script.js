@@ -56,6 +56,33 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePrice();
     syncAdminRatesUI();
 
+    // Nav Link Calculator Toggles
+    const navBuy = document.querySelector('a[href="#buy"]');
+    const navSell = document.querySelector('a[href="#sell"]');
+    const calculatorCard = document.querySelector('.calculator-card');
+
+    if (navBuy) {
+        navBuy.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentMode = 'buy';
+            buyBtn.classList.add('active');
+            sellBtn.classList.remove('active');
+            updatePrice();
+            calculatorCard.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    if (navSell) {
+        navSell.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentMode = 'sell';
+            sellBtn.classList.add('active');
+            buyBtn.classList.remove('active');
+            updatePrice();
+            calculatorCard.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
     // Quick Select Logic
     const selectButtons = document.querySelectorAll('.select-btn');
     selectButtons.forEach(btn => {
