@@ -78,7 +78,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = goldInput.value;
         const type = currentMode.toUpperCase();
         
-        alert(`Please use the chat bubble to ${type} ${amount}M gold!`);
+        if (typeof Tawk_API !== 'undefined') {
+            Tawk_API.maximize();
+            // Optional: Send trade info as an attribute or event
+            Tawk_API.addEvent('trade-intent', {
+                'action': type,
+                'amount': amount + 'M',
+                'total': priceDisplay.textContent + ' USD'
+            }, function(error){});
+            
+            // Note: Tawk.to doesn't allow sending a message AS the user directly via JS API 
+            // but maximizing and adding an event/attribute alerts the agent.
+        } else {
+            alert(`Please use the chat bubble to ${type} ${amount}M gold!`);
+        }
     });
 
     // Login & Admin Logic
